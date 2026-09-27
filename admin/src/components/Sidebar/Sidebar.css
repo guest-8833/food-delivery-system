@@ -1,0 +1,75 @@
+/* Sidebar.css – Admin Sidebar with Green Theme */
+
+.sidebar {
+    width: 260px;
+    min-height: calc(100vh - 70px);
+    background: rgba(20, 30, 20, 0.95);
+    backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(76, 175, 80, 0.3);
+    padding: 20px 0;
+}
+
+.sidebar-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    color: #e0e0e0;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+}
+
+.sidebar-option:hover {
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.sidebar-option.active {
+    background: rgba(76, 175, 80, 0.15);
+    border-left-color: #4CAF50;
+    color: #4CAF50;
+}
+
+.sidebar-option img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.sidebar-option.active img {
+    filter: brightness(0) invert(0.7) sepia(1) hue-rotate(80deg) saturate(5);
+    opacity: 1;
+}
+
+.sidebar-option p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+        padding: 15px 0;
+    }
+    .sidebar-option {
+        justify-content: center;
+        padding: 12px;
+    }
+    .sidebar-option p {
+        display: none;
+    }
+    .sidebar-option img {
+        width: 24px;
+        height: 24px;
+    }
+}

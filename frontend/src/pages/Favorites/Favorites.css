@@ -1,0 +1,87 @@
+.favorites {
+  padding: 24px 4vw 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 60vh;
+}
+
+/* ---------- Header ---------- */
+.favorites-header {
+  margin-bottom: 24px;
+}
+.favorites-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #262626;
+  margin: 0;
+}
+.favorites-sub {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #888;
+}
+
+/* ---------- Grid (matches Home food grid) ---------- */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+/* ---------- Loading ---------- */
+.favorites-loading {
+  text-align: center;
+  padding: 80px 20px;
+  color: #888;
+}
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #eee;
+  border-top-color: #e8590c;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Empty state ---------- */
+.favorites-empty {
+  text-align: center;
+  padding: 70px 20px;
+}
+.favorites-empty-icon {
+  font-size: 64px;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+.favorites-empty h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #262626;
+  margin: 0 0 8px;
+}
+.favorites-empty p {
+  color: #888;
+  font-size: 14px;
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+.favorites-browse-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 30px;
+  background: #e8590c;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(232, 89, 12, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.favorites-browse-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(232, 89, 12, 0.45);
+}

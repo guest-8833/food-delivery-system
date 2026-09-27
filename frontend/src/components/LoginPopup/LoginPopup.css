@@ -1,0 +1,434 @@
+/* LoginPopup.css — Glassmorphic, matches Home page brand */
+
+/* ============================================================
+   BRAND TOKENS (aligned with Home.css)
+   ============================================================ */
+:root {
+    --lp-brand-500: #FF6B35;
+    --lp-brand-600: #FF3C00;
+    --lp-brand-700: #E62E00;
+    --lp-brand-gradient: linear-gradient(135deg, #FF6B35 0%, #FF3C00 100%);
+    --lp-brand-gradient-hover: linear-gradient(135deg, #FF7A45 0%, #FF4A15 100%);
+    --lp-brand-soft: #FFF5F0;
+    --lp-brand-glow: rgba(255, 107, 53, 0.28);
+    --lp-brand-glow-strong: rgba(255, 107, 53, 0.42);
+
+    --lp-ink-100: #FFFFFF;
+    --lp-ink-200: #E8E8EE;
+    --lp-ink-300: #B8B8C4;
+    --lp-ink-400: #7A7A88;
+
+    --lp-surface: rgba(22, 22, 32, 0.98);
+    --lp-surface-input: rgba(15, 15, 22, 0.85);
+    --lp-surface-input-hover: rgba(20, 20, 30, 0.92);
+    --lp-surface-input-focus: rgba(15, 15, 22, 1);
+
+    --lp-line: rgba(255, 255, 255, 0.12);
+    --lp-line-strong: rgba(255, 255, 255, 0.18);
+    --lp-line-brand: rgba(255, 107, 53, 0.35);
+
+    --lp-shadow-panel: 0 30px 60px rgba(0, 0, 0, 0.5),
+                       inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    --lp-shadow-button: 0 8px 22px rgba(255, 60, 0, 0.28);
+    --lp-shadow-button-hover: 0 16px 36px rgba(255, 60, 0, 0.52);
+
+    --lp-radius-pill: 999px;
+    --lp-radius-panel: 32px;
+    --lp-radius-panel-sm: 24px;
+
+    --lp-font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Oxygen, Ubuntu, "Helvetica Neue", sans-serif;
+
+    --lp-ease: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    --lp-ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+    --lp-transition: 0.22s ease;
+}
+
+/* ============================================================
+   BACKDROP
+   ============================================================ */
+.login-popup {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 5, 10, 0.72);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: lpFadeIn 0.24s var(--lp-ease-soft);
+}
+
+@keyframes lpFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ============================================================
+   PANEL
+   ============================================================ */
+.login-popup-container {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    background: var(--lp-surface);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-radius: var(--lp-radius-panel);
+    padding: 38px 34px;
+    border: 1px solid var(--lp-line);
+    box-shadow: var(--lp-shadow-panel);
+    animation: lpSlideUp 0.38s var(--lp-ease);
+    font-family: var(--lp-font);
+    color: var(--lp-ink-100);
+
+    /* Subtle warm glow, matches Home hero */
+    background-image:
+        radial-gradient(circle at 100% 0%, rgba(255, 107, 53, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 0% 100%, rgba(255, 60, 0, 0.06) 0%, transparent 45%);
+}
+
+/* Thin brand-accent line at the very top of the panel */
+.login-popup-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    border-radius: 0 0 4px 4px;
+    background: var(--lp-brand-gradient);
+    opacity: 0.85;
+}
+
+.login-popup-container::-webkit-scrollbar { width: 8px; }
+.login-popup-container::-webkit-scrollbar-track { background: transparent; }
+.login-popup-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+}
+.login-popup-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.24);
+}
+
+@keyframes lpSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+.login-popup-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 12px;
+}
+
+.login-popup-title h2 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0;
+    line-height: 1.15;
+    background: var(--lp-brand-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Optional subtitle — only shows if you add it in the JSX */
+.login-popup-subtitle {
+    color: var(--lp-ink-300);
+    font-size: 0.9rem;
+    margin: 0 0 26px 0;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+/* Close button */
+.login-popup-title img {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+    transition: opacity var(--lp-transition), transform var(--lp-transition),
+                background var(--lp-transition);
+    flex-shrink: 0;
+    padding: 4px;
+    box-sizing: content-box;
+    border-radius: 50%;
+}
+
+.login-popup-title img:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.login-popup-title img:focus-visible {
+    outline: 2px solid var(--lp-brand-500);
+    outline-offset: 4px;
+}
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+.login-popup-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 22px;
+    margin-top: 18px;
+}
+
+.login-popup-inputs input {
+    width: 100%;
+    background: var(--lp-surface-input);
+    border: 1px solid var(--lp-line);
+    border-radius: var(--lp-radius-pill);
+    padding: 15px 20px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--lp-ink-100);
+    outline: none;
+    transition: border-color var(--lp-transition),
+                box-shadow var(--lp-transition),
+                background var(--lp-transition);
+}
+
+.login-popup-inputs input::placeholder {
+    color: var(--lp-ink-400);
+}
+
+.login-popup-inputs input:hover {
+    border-color: var(--lp-line-strong);
+    background: var(--lp-surface-input-hover);
+}
+
+.login-popup-inputs input:focus {
+    border-color: var(--lp-brand-500);
+    background: var(--lp-surface-input-focus);
+    box-shadow: 0 0 0 4px var(--lp-brand-glow);
+}
+
+/* Autofill fix — Chrome's yellow background */
+.login-popup-inputs input:-webkit-autofill,
+.login-popup-inputs input:-webkit-autofill:hover,
+.login-popup-inputs input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--lp-ink-100);
+    -webkit-box-shadow: 0 0 0 1000px var(--lp-surface-input) inset;
+    transition: background-color 5000s ease-in-out 0s;
+    caret-color: var(--lp-ink-100);
+}
+
+/* ============================================================
+   SUBMIT BUTTON
+   ============================================================ */
+.login-popup-container button[type="submit"] {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--lp-brand-gradient);
+    border: none;
+    padding: 15px;
+    border-radius: var(--lp-radius-pill);
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: var(--lp-shadow-button);
+    transition: transform var(--lp-transition),
+                box-shadow var(--lp-transition),
+                background var(--lp-transition),
+                opacity var(--lp-transition);
+}
+
+.login-popup-container button[type="submit"]:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--lp-shadow-button-hover);
+    background: var(--lp-brand-gradient-hover);
+}
+
+.login-popup-container button[type="submit"]:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--lp-shadow-button);
+}
+
+.login-popup-container button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: 0 6px 16px rgba(255, 60, 0, 0.22);
+}
+
+.login-popup-container button[type="submit"]:focus-visible {
+    outline: 2px solid var(--lp-brand-500);
+    outline-offset: 3px;
+}
+
+/* Spinner */
+.login-spinner {
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    animation: lpSpin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes lpSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   TERMS CHECKBOX
+   ============================================================ */
+.login-popup-condition {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.login-popup-condition input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: var(--lp-brand-500);
+    flex-shrink: 0;
+}
+
+.login-popup-condition input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--lp-brand-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.login-popup-condition p {
+    font-size: 0.85rem;
+    color: var(--lp-ink-300);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ============================================================
+   FOOTER SWITCH TEXT
+   ============================================================ */
+.login-popup-container > p {
+    text-align: center;
+    color: var(--lp-ink-300);
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.login-popup-container > p span {
+    color: var(--lp-brand-500);
+    cursor: pointer;
+    font-weight: 700;
+    transition: color var(--lp-transition);
+    text-underline-offset: 3px;
+}
+
+.login-popup-container > p span:hover {
+    color: var(--lp-brand-600);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+    .login-popup {
+        padding: 12px;
+    }
+
+    .login-popup-container {
+        padding: 28px 22px;
+        border-radius: var(--lp-radius-panel-sm);
+    }
+
+    .login-popup-container::before {
+        width: 50px;
+    }
+
+    .login-popup-title {
+        margin-bottom: 6px;
+    }
+
+    .login-popup-title h2 {
+        font-size: 1.55rem;
+    }
+
+    .login-popup-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+
+    .login-popup-inputs {
+        gap: 12px;
+        margin-bottom: 18px;
+        margin-top: 14px;
+    }
+
+    .login-popup-inputs input {
+        padding: 13px 18px;
+        font-size: 0.9rem;
+    }
+
+    .login-popup-container button[type="submit"] {
+        padding: 13px;
+        font-size: 0.95rem;
+    }
+
+    .login-popup-condition p {
+        font-size: 0.8rem;
+    }
+
+    .login-popup-container > p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .login-popup,
+    .login-popup-container,
+    .login-popup-title img,
+    .login-popup-container button[type="submit"] {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .login-spinner {
+        animation-duration: 0.01ms !important;
+    }
+}

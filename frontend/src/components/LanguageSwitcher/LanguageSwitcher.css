@@ -1,0 +1,87 @@
+/* LanguageSwitcher.css */
+
+.language-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line-soft, rgba(255, 255, 255, 0.1));
+    border-radius: 40px;
+    transition: background var(--transition-fast, 0.2s ease),
+                border-color var(--transition-fast, 0.2s ease);
+}
+
+.language-switcher:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Each language option button */
+.language-option {
+    position: relative;
+    padding: 0.35rem 0.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 40px;
+    color: var(--text-muted, #a8d4b8);
+    font-family: var(--font-sans, inherit);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease,
+                background 0.25s ease,
+                transform 0.2s ease;
+    white-space: nowrap;
+}
+
+.language-option:hover {
+    color: var(--text-light, #ffffff);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.language-option:focus-visible {
+    outline: 2px solid var(--accent, #1db954);
+    outline-offset: 2px;
+}
+
+/* Active language — filled with brand gradient */
+.language-option-active {
+    color: #071510;
+    background: linear-gradient(135deg, #52d98a, #1db954);
+    box-shadow: 0 3px 10px rgba(29, 185, 84, 0.35);
+}
+
+.language-option-active:hover {
+    color: #071510;
+    background: linear-gradient(135deg, #5ce090, #22c95e);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(29, 185, 84, 0.45);
+}
+
+.language-option-active:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(29, 185, 84, 0.35);
+}
+
+/* Responsive — smaller on tablet */
+@media (max-width: 768px) {
+    .language-switcher {
+        padding: 2px;
+        gap: 3px;
+    }
+
+    .language-option {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Very small screens — hide the switcher if the navbar is tight.
+   Remove this block if you want to keep it visible everywhere. */
+@media (max-width: 400px) {
+    .language-switcher {
+        display: none;
+    }
+}

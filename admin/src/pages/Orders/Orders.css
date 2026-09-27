@@ -1,0 +1,724 @@
+/* ============================================================
+   Orders.css — Admin Orders View
+   Font pairing: Plus Jakarta Sans (headings) + Inter (body)
+   Palette: Cool indigo + teal + coral accents
+   ============================================================ */
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+    /* Accent — indigo primary, coral for actions */
+    --or-accent-400: #818CF8;    /* indigo light */
+    --or-accent-500: #6366F1;    /* indigo */
+    --or-accent-600: #4F46E5;    /* indigo deep */
+    --or-accent-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    --or-accent-gradient-hover: linear-gradient(135deg, #818CF8 0%, #A78BFA 100%);
+    --or-accent-soft: rgba(99, 102, 241, 0.14);
+    --or-accent-glow: rgba(99, 102, 241, 0.28);
+
+    /* Secondary — teal for values/prices */
+    --or-teal-400: #2DD4BF;
+    --or-teal-500: #14B8A6;
+    --or-teal-soft: rgba(45, 212, 191, 0.14);
+
+    /* Coral — for remove/delete */
+    --or-coral-400: #FB7185;
+    --or-coral-500: #F43F5E;
+    --or-coral-soft: rgba(244, 63, 94, 0.15);
+    --or-coral-glow: rgba(244, 63, 94, 0.4);
+
+    /* Gold — for rating stars / amounts */
+    --or-gold-400: #FBBF24;
+    --or-gold-soft: rgba(251, 191, 36, 0.1);
+
+    /* Label / value colors */
+    --or-label: #A5B4FC;   /* soft indigo — labels inside <strong> */
+    --or-value: #F8FAFC;   /* near-white with cool tint — values */
+
+    /* Surfaces — cool dark, slightly bluish */
+    --or-surface-900: #0F172A;    /* page bg */
+    --or-surface-800: #1E293B;    /* feedback panel */
+    --or-surface-750: #1E293B;    /* order item */
+    --or-surface-700: #334155;    /* order item hover */
+    --or-surface-600: #334155;    /* select bg */
+
+    /* Text */
+    --or-ink-100: #F8FAFC;
+    --or-ink-200: #CBD5E1;
+    --or-ink-300: #94A3B8;
+    --or-ink-400: rgba(148, 163, 184, 0.7);
+
+    /* Status */
+    --or-success: #6EE7B7;
+    --or-success-bg: rgba(16, 185, 129, 0.14);
+
+    /* Lines & borders */
+    --or-line: rgba(148, 163, 184, 0.14);
+    --or-line-strong: rgba(148, 163, 184, 0.22);
+    --or-line-accent: rgba(99, 102, 241, 0.55);
+
+    /* Shadows */
+    --or-shadow-panel: 0 24px 40px -12px rgba(0, 0, 0, 0.55),
+                       inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    --or-shadow-item-hover: 0 14px 30px rgba(0, 0, 0, 0.35);
+    --or-shadow-button: 0 6px 16px rgba(99, 102, 241, 0.32);
+    --or-shadow-button-hover: 0 10px 24px rgba(99, 102, 241, 0.45);
+    --or-shadow-danger: 0 6px 16px rgba(244, 63, 94, 0.4);
+
+    /* Radii */
+    --or-radius-xl: 28px;
+    --or-radius-lg: 20px;
+    --or-radius-md: 12px;
+    --or-radius-sm: 10px;
+    --or-radius-pill: 999px;
+
+    /* Motion */
+    --or-ease: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    --or-transition: 0.22s ease;
+
+    /* Fonts */
+    --or-font-heading: "Plus Jakarta Sans", "Inter",
+                        -apple-system, BlinkMacSystemFont, "Segoe UI",
+                        sans-serif;
+    --or-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    Roboto, sans-serif;
+    --or-font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ============================================================
+   PAGE WRAPPER
+   ============================================================ */
+.order {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 32px;
+    background: var(--or-surface-900);
+    background-image:
+        radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 0% 100%, rgba(139, 92, 246, 0.06) 0%, transparent 45%);
+    border-radius: var(--or-radius-xl);
+    border: 1px solid var(--or-line);
+    box-shadow: var(--or-shadow-panel);
+    font-family: var(--or-font-body);
+    color: var(--or-ink-100);
+    z-index: 1;
+}
+
+/* ============================================================
+   HEADING
+   ============================================================ */
+.order h3 {
+    font-family: var(--or-font-heading);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0 0 28px 0;
+    background: linear-gradient(135deg, #818CF8 0%, #A78BFA 50%, #2DD4BF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* ============================================================
+   ORDER LIST
+   ============================================================ */
+.order-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.no-orders {
+    padding: 44px 24px;
+    text-align: center;
+    color: var(--or-ink-300);
+    font-size: 0.95rem;
+    background: var(--or-surface-800);
+    border-radius: var(--or-radius-lg);
+    border: 1px dashed var(--or-line-strong);
+}
+
+.loading-spinner {
+    padding: 44px 24px;
+    text-align: center;
+    color: var(--or-ink-300);
+    font-size: 0.95rem;
+}
+
+/* ============================================================
+   ORDER ITEM WRAPPER
+   ============================================================ */
+.order-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-radius: var(--or-radius-lg);
+    overflow: hidden;
+    background: var(--or-surface-750);
+    border: 1px solid var(--or-line);
+    transition: border-color var(--or-transition),
+                box-shadow var(--or-transition),
+                transform var(--or-transition);
+}
+
+.order-item-wrapper:hover {
+    border-color: var(--or-line-accent);
+    box-shadow: var(--or-shadow-item-hover);
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   ORDER ITEM — main row
+   icon | info | count | total | status | remove
+   ============================================================ */
+.order-item {
+    display: grid;
+    grid-template-columns: 60px minmax(0, 1fr) 100px 160px 180px 130px;
+    align-items: center;
+    gap: 22px;
+    padding: 22px 26px;
+    background: transparent;
+    transition: background var(--or-transition);
+}
+
+.order-item-wrapper:hover .order-item {
+    background: var(--or-surface-700);
+}
+
+/* Parcel icon */
+.order-item > img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+}
+
+/* Info column */
+.order-item > div {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    min-width: 0;
+}
+
+/* Food line */
+.order-item-food {
+    display: inline-block;
+    align-self: flex-start;
+    max-width: 100%;
+    padding: 7px 13px;
+    font-family: var(--or-font-body);
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--or-value);
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--or-line);
+    border-radius: var(--or-radius-sm);
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+/* Customer name */
+.order-item-name {
+    margin: 0;
+    font-family: var(--or-font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--or-value);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+}
+
+/* Address block */
+.order-item-address {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 13.5px;
+    color: var(--or-ink-200);
+    line-height: 1.5;
+}
+
+.order-item-address p {
+    margin: 0;
+}
+
+/* Phone */
+.order-item-phone {
+    display: inline-block;
+    align-self: flex-start;
+    margin: 0;
+    padding: 5px 13px;
+    font-family: var(--or-font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--or-teal-400);
+    background: var(--or-teal-soft);
+    border: 1px solid rgba(45, 212, 191, 0.25);
+    border-radius: var(--or-radius-pill);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   LABELS — every <strong> gets the label color
+   ============================================================ */
+.order-item strong {
+    color: var(--or-label);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-right: 4px;
+}
+
+.order-item-food strong,
+.order-item-name strong,
+.order-item-address strong,
+.order-item-phone strong {
+    font-size: 0.92em;
+    opacity: 0.95;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* Override phone label to match the teal phone chip */
+.order-item-phone strong {
+    color: var(--or-teal-400);
+}
+
+/* ── Items count badge ────────────────────────── */
+.order-item-count {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 6px 14px;
+    font-family: var(--or-font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--or-accent-400);
+    background: var(--or-accent-soft);
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    border-radius: var(--or-radius-pill);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ── Total amount ─────────────────────────────── */
+.order-item-total {
+    margin: 0;
+    font-family: var(--or-font-heading);
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--or-gold-400);
+    text-align: right;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+}
+
+.order-item-total strong {
+    display: block;
+    margin: 0 0 3px 0;
+    font-family: var(--or-font-body);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--or-ink-300);
+    opacity: 1;
+}
+
+/* ============================================================
+   STATUS SELECT
+   ============================================================ */
+.order-item select {
+    width: 100%;
+    padding: 10px 16px;
+    font-family: var(--or-font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--or-ink-100);
+    background: var(--or-surface-600);
+    border: 1px solid var(--or-line-accent);
+    border-radius: var(--or-radius-pill);
+    cursor: pointer;
+    outline: none;
+    transition: background var(--or-transition),
+                color var(--or-transition),
+                border-color var(--or-transition),
+                box-shadow var(--or-transition);
+}
+
+.order-item select:hover {
+    background: var(--or-accent-500);
+    color: #fff;
+    border-color: var(--or-accent-500);
+}
+
+.order-item select:focus {
+    border-color: var(--or-accent-400);
+    box-shadow: 0 0 0 3px var(--or-accent-glow);
+}
+
+.order-item select:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.order-item select option {
+    background: var(--or-surface-600);
+    color: var(--or-ink-100);
+    font-weight: 500;
+}
+
+/* ============================================================
+   REMOVE ORDER BUTTON
+   ============================================================ */
+.remove-order-btn {
+    width: 100%;
+    padding: 10px 16px;
+    font-family: var(--or-font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--or-coral-400);
+    background: var(--or-coral-soft);
+    border: 1px solid rgba(244, 63, 94, 0.4);
+    border-radius: var(--or-radius-pill);
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    transition: background var(--or-transition),
+                color var(--or-transition),
+                transform var(--or-transition),
+                box-shadow var(--or-transition),
+                border-color var(--or-transition);
+}
+
+.remove-order-btn:hover:not(:disabled) {
+    background: var(--or-coral-500);
+    color: #fff;
+    border-color: var(--or-coral-500);
+    transform: translateY(-2px);
+    box-shadow: var(--or-shadow-danger);
+}
+
+.remove-order-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.remove-order-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.remove-order-btn:focus-visible {
+    outline: 2px solid var(--or-coral-400);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   FEEDBACK PANEL
+   ============================================================ */
+.order-feedback-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 26px 22px;
+    background: var(--or-surface-800);
+    border-top: 1px solid var(--or-line);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.order-feedback-label {
+    margin: 0;
+    font-family: var(--or-font-heading);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--or-accent-400);
+}
+
+.order-feedback-stars {
+    display: block;
+    margin: 0 0 4px;
+    color: var(--or-gold-400);
+    font-size: 1.15rem;
+    letter-spacing: 3px;
+    line-height: 1;
+}
+
+.order-feedback-comment {
+    margin: 0;
+    padding: 12px 16px;
+    font-family: var(--or-font-body);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--or-ink-200);
+    background: var(--or-gold-soft);
+    border-left: 3px solid var(--or-gold-400);
+    border-radius: var(--or-radius-sm);
+    line-height: 1.55;
+}
+
+.order-feedback-already-replied,
+.order-feedback-replied {
+    margin: 0;
+    padding: 11px 15px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--or-success);
+    background: var(--or-success-bg);
+    border: 1px solid rgba(16, 185, 129, 0.22);
+    border-radius: var(--or-radius-md);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   REPLY BOX
+   ============================================================ */
+.order-reply-box {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 4px;
+}
+
+.order-reply-box textarea {
+    width: 100%;
+    padding: 11px 15px;
+    font-family: var(--or-font-body);
+    font-size: 13.5px;
+    color: var(--or-ink-100);
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--or-line);
+    border-radius: var(--or-radius-md);
+    outline: none;
+    resize: vertical;
+    min-height: 62px;
+    transition: border-color var(--or-transition),
+                box-shadow var(--or-transition),
+                background var(--or-transition);
+}
+
+.order-reply-box textarea::placeholder {
+    color: var(--or-ink-400);
+}
+
+.order-reply-box textarea:focus {
+    border-color: var(--or-accent-500);
+    background: rgba(15, 23, 42, 0.75);
+    box-shadow: 0 0 0 3px var(--or-accent-glow);
+}
+
+.order-reply-box button {
+    align-self: flex-start;
+    padding: 10px 24px;
+    font-family: var(--or-font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    background: var(--or-accent-gradient);
+    border: none;
+    border-radius: var(--or-radius-pill);
+    cursor: pointer;
+    box-shadow: var(--or-shadow-button);
+    transition: transform var(--or-transition),
+                box-shadow var(--or-transition),
+                background var(--or-transition),
+                opacity var(--or-transition);
+}
+
+.order-reply-box button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: var(--or-shadow-button-hover);
+    background: var(--or-accent-gradient-hover);
+}
+
+.order-reply-box button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--or-shadow-button);
+}
+
+.order-reply-box button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.order-reply-box button:focus-visible {
+    outline: 2px solid var(--or-accent-400);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   RESPONSIVE — Large tablet
+   ============================================================ */
+@media (max-width: 1200px) {
+    .order-item {
+        grid-template-columns: 52px minmax(0, 1fr) 90px 140px 160px 110px;
+        gap: 16px;
+        padding: 20px 22px;
+    }
+
+    .order-item select,
+    .remove-order-btn {
+        font-size: 12.5px;
+        padding: 9px 12px;
+    }
+
+    .order-item-total {
+        font-size: 17px;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — Tablet: single column, centered
+   ============================================================ */
+@media (max-width: 900px) {
+    .order {
+        padding: 24px 20px;
+        border-radius: var(--or-radius-lg);
+    }
+
+    .order h3 {
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .order-item {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: center;
+        justify-items: center;
+        padding: 24px 20px;
+    }
+
+    .order-item > div {
+        align-items: center;
+        width: 100%;
+    }
+
+    .order-item-food,
+    .order-item-phone {
+        align-self: center;
+    }
+
+    .order-item-address {
+        align-items: center;
+    }
+
+    .order-item > img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .order-item-count,
+    .order-item-total {
+        width: auto;
+        text-align: center;
+    }
+
+    .order-item-total strong {
+        text-align: center;
+    }
+
+    .order-item select,
+    .remove-order-btn {
+        width: auto;
+        min-width: 220px;
+    }
+
+    .remove-order-btn {
+        white-space: normal;
+    }
+
+    .order-feedback-panel {
+        align-items: center;
+        text-align: center;
+        padding: 18px 20px 22px;
+    }
+
+    .order-reply-box {
+        align-items: center;
+        width: 100%;
+    }
+
+    .order-reply-box textarea {
+        width: 100%;
+        text-align: left;
+    }
+
+    .order-reply-box button {
+        align-self: center;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — Phone
+   ============================================================ */
+@media (max-width: 480px) {
+    .order {
+        padding: 22px 16px;
+    }
+
+    .order h3 {
+        font-size: 22px;
+        margin-bottom: 22px;
+    }
+
+    .order-list {
+        gap: 14px;
+    }
+
+    .order-item {
+        padding: 20px 16px;
+        gap: 14px;
+    }
+
+    .order-item select,
+    .remove-order-btn {
+        min-width: 180px;
+        font-size: 12px;
+        padding: 9px 14px;
+    }
+
+    .order-feedback-panel {
+        padding: 16px 18px 20px;
+    }
+
+    .order-feedback-comment {
+        font-size: 13px;
+    }
+
+    .order-item-total {
+        font-size: 17px;
+    }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .order-item-wrapper,
+    .order-item,
+    .order-item select,
+    .remove-order-btn,
+    .order-reply-box button,
+    .order-reply-box textarea {
+        transition-duration: 0.01ms !important;
+    }
+
+    .order-item-wrapper:hover {
+        transform: none;
+    }
+}

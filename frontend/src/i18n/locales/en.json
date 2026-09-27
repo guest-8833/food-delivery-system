@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "cart": "Cart",
+    "myOrders": "My Orders",
+    "login": "Login",
+    "logout": "Logout",
+    "mobileApp": "Mobile App",
+    "contactUs": "Contact Us",
+    "searchFood": "Search food...",
+    "searchPlaceholder": "Search for delicious food..."
+  },
+  "header": {
+    "title": "Order your favourite food here",
+    "subtitle": "Authentic Ethiopian food — injera, doro wat, tibs and more.",
+    "cta": "View Menu"
+  },
+  "foodDisplay": {
+    "heading": "Top dishes near you",
+    "subheading": "Discover our most popular and highest-rated dishes",
+    "loading": "Loading delicious food...",
+    "noItemsInCategory": "No items found in \"{{category}}\"",
+    "tryOtherCategories": "Try other categories!",
+    "noItemsAvailable": "No food items available at the moment.",
+    "refresh": "Refresh"
+  },
+  "foodItem": {
+    "addToCart": "Add to cart",
+    "currentlyUnavailable": "Currently unavailable",
+    "outOfStock": "Out of stock",
+    "soldOut": "Sold out",
+    "left": "{{count}} left",
+    "percentOfSales": "{{percent}}% of sales"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "emptySubtitle": "Add some delicious items to get started!",
+    "browseMenu": "Browse Menu",
+    "item": "Item",
+    "titleColumn": "Title",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "adjust": "Adjust",
+    "cartTotals": "Cart Totals",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "proceedToCheckout": "Proceed to Checkout",
+    "deliveryInformation": "Delivery Information",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "streetAddress": "Street address",
+    "city": "City",
+    "state": "State",
+    "country": "Country",
+    "zipCode": "Zip code",
+    "phoneNumber": "Phone number",
+    "email": "Email (required for Chapa payment)",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "Cash on Delivery",
+    "chapaPayment": "Chapa (Card / Telebirr / CBE)",
+    "placeOrder": "Place Order",
+    "placingOrder": "Placing order...",
+    "onlyInStock": "Only {{count}} left — max reached",
+    "noMoreInStock": "No more in stock"
+  },
+  "myOrders": {
+    "title": "My Orders",
+    "pleaseLogin": "Please login to view your orders.",
+    "loading": "Loading your orders...",
+    "noOrders": "No orders found.",
+    "startShopping": "Start Shopping",
+    "live": "Live",
+    "updated": "Updated {{time}}",
+    "processing": "Processing",
+    "outForDelivery": "Out for Delivery",
+    "delivered": "Delivered",
+    "statusPendingPayment": "Pending Payment",
+    "statusCancelled": "Cancelled",
+    "paid": "Paid",
+    "pending": "Pending",
+    "items": "Items",
+    "cancelled": "This order was cancelled.",
+    "waitingForPayment": "Waiting for payment confirmation...",
+    "refresh": "Refresh"
+  },
+  "common": {
+    "etb": "ETB"
+  },
+  "footer": {
+    "brand": "Zengena",
+    "about": "Zengena Restaurant is Ethiopia's newest culinary destination, bringing a fresh and modern dining experience to the food scene. Inspired by the natural beauty and depth of the famous crater lake, we serve an exciting mix of authentic Ethiopian flavors and contemporary dishes. Whether you are looking for a vibrant family dinner or a relaxed spot to unwind, Zengena offers exceptional taste, warm hospitality, and a brand-new atmosphere you won't find anywhere else.",
+    "getInTouch": "GET IN TOUCH",
+    "phone": "+251983394567",
+    "email": "you375537@gmail.com",
+    "copyright": "Copyright — All Rights Reserved."
+  }
+}

@@ -1,0 +1,724 @@
+/* ============================================================
+   MyOrders.css — Customer Orders View
+   Card background: deep navy-indigo (#1E1B4B)
+   ============================================================ */
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+    /* Accent — indigo */
+    --mo-accent-300: #A5B4FC;
+    --mo-accent-400: #818CF8;
+    --mo-accent-500: #6366F1;
+    --mo-accent-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    --mo-accent-gradient-hover: linear-gradient(135deg, #818CF8 0%, #A78BFA 100%);
+    --mo-accent-soft: rgba(99, 102, 241, 0.14);
+    --mo-accent-glow: rgba(99, 102, 241, 0.28);
+
+    /* Distinct accent colors */
+    --mo-c-teal: #2DD4BF;
+    --mo-c-teal-soft: rgba(45, 212, 191, 0.14);
+    --mo-c-gold: #FBBF24;
+    --mo-c-gold-soft: rgba(251, 191, 36, 0.12);
+    --mo-c-coral: #FB7185;
+    --mo-c-coral-soft: rgba(244, 63, 94, 0.14);
+    --mo-c-amber: #FCD34D;
+    --mo-c-amber-soft: rgba(252, 211, 77, 0.14);
+    --mo-c-fuchsia: #E879F9;
+    --mo-c-sky: #7DD3FC;
+
+    /* ============================================================
+       SURFACES  ← change these to retint the whole page
+       ============================================================ */
+    --mo-surface-900: #0F172A;              /* page bg */
+    --mo-surface-800: #1E1B4B;              /* ✅ NEW card bg — deep navy-indigo */
+    --mo-surface-750: #252150;              /* card hover (slightly lighter) */
+    --mo-surface-700: #312E81;              /* input / active */
+    --mo-surface-inset: rgba(15, 23, 42, 0.55);
+
+    /* Text */
+    --mo-ink-100: #F8FAFC;
+    --mo-ink-200: #CBD5E1;
+    --mo-ink-300: #94A3B8;
+    --mo-ink-400: rgba(148, 163, 184, 0.7);
+
+    /* Lines */
+    --mo-line: rgba(165, 180, 252, 0.14);   /* slight indigo tint */
+    --mo-line-strong: rgba(165, 180, 252, 0.22);
+    --mo-line-accent: rgba(99, 102, 241, 0.55);
+
+    /* Shadows */
+    --mo-shadow-card: 0 10px 24px -8px rgba(0, 0, 0, 0.5),
+                      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    --mo-shadow-card-hover: 0 16px 32px -8px rgba(0, 0, 0, 0.6);
+    --mo-shadow-button: 0 6px 16px rgba(99, 102, 241, 0.32);
+    --mo-shadow-button-hover: 0 10px 24px rgba(99, 102, 241, 0.45);
+
+    /* Radii */
+    --mo-radius-xl: 28px;
+    --mo-radius-lg: 20px;
+    --mo-radius-md: 12px;
+    --mo-radius-sm: 10px;
+    --mo-radius-pill: 999px;
+
+    /* Motion */
+    --mo-transition: 0.22s ease;
+
+    /* Fonts */
+    --mo-font-heading: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+    --mo-font-body:    "Inter", system-ui, -apple-system, sans-serif;
+    --mo-font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ============================================================
+   PAGE LAYOUT
+   ============================================================ */
+.my-orders {
+    min-height: 100vh;
+    padding: 32px 24px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--mo-surface-900);
+    background-image:
+        radial-gradient(circle at 100% 0%, rgba(99, 102, 241, 0.1) 0%, transparent 45%),
+        radial-gradient(circle at 0% 100%, rgba(139, 92, 246, 0.08) 0%, transparent 45%);
+    color: var(--mo-ink-100);
+    font-family: var(--mo-font-body);
+    font-size: 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   HEADING
+   ============================================================ */
+.my-orders-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.my-orders-heading h2 {
+    margin: 0;
+    font-family: var(--mo-font-heading);
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    background: linear-gradient(135deg, #818CF8 0%, #E879F9 50%, #2DD4BF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    font-family: var(--mo-font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--mo-c-teal);
+    background: var(--mo-c-teal-soft);
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    border-radius: var(--mo-radius-pill);
+    white-space: nowrap;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mo-c-teal);
+    box-shadow: 0 0 10px rgba(45, 212, 191, 0.9);
+    animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes live-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ============================================================
+   ORDER CARD — deep navy-indigo
+   ============================================================ */
+.my-orders-order {
+    position: relative;
+    background: var(--mo-surface-800);      /* #1E1B4B */
+    border: 1px solid var(--mo-line);
+    border-radius: var(--mo-radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--mo-shadow-card);
+    transition: border-color var(--mo-transition),
+                box-shadow var(--mo-transition),
+                background var(--mo-transition),
+                transform var(--mo-transition);
+}
+
+.my-orders-order:hover {
+    background: var(--mo-surface-750);      /* #252150 on hover */
+    border-color: var(--mo-line-accent);
+    box-shadow: var(--mo-shadow-card-hover);
+    transform: translateY(-2px);
+}
+
+/* ============================================================
+   TOP ROW
+   ============================================================ */
+.my-orders-order-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.my-orders-order-top img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+/* ============================================================
+   ORDER INFO
+   ============================================================ */
+.order-info {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.order-items {
+    margin: 0 0 4px;
+    font-family: var(--mo-font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--mo-ink-100);
+    line-height: 1.45;
+}
+
+.order-date,
+.order-payment {
+    margin: 0;
+    font-family: var(--mo-font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--mo-c-sky);
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+}
+
+.order-payment {
+    color: var(--mo-ink-300);
+}
+
+.order-amount {
+    margin: 0;
+    font-family: var(--mo-font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--mo-c-gold);
+    white-space: nowrap;
+    text-shadow: 0 0 14px rgba(251, 191, 36, 0.4);
+}
+
+.order-items-count {
+    margin: 0;
+    padding: 4px 12px;
+    font-family: var(--mo-font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--mo-c-fuchsia);
+    background: rgba(232, 121, 249, 0.12);
+    border: 1px solid rgba(232, 121, 249, 0.3);
+    border-radius: var(--mo-radius-pill);
+    white-space: nowrap;
+}
+
+.order-status {
+    margin: 0;
+    padding: 6px 14px;
+    font-family: var(--mo-font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: rgba(165, 180, 252, 0.1);
+    border: 1px solid var(--mo-line-strong);
+    border-radius: var(--mo-radius-pill);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.order-status b {
+    font-weight: 700;
+}
+
+/* ============================================================
+   REFRESH BUTTON
+   ============================================================ */
+.my-orders-order-top button {
+    padding: 8px 16px;
+    font-family: var(--mo-font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--mo-accent-300);
+    background: var(--mo-accent-soft);
+    border: 1px solid rgba(99, 102, 241, 0.28);
+    border-radius: var(--mo-radius-pill);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--mo-transition),
+                color var(--mo-transition),
+                border-color var(--mo-transition),
+                transform var(--mo-transition),
+                box-shadow var(--mo-transition);
+}
+
+.my-orders-order-top button:hover {
+    background: var(--mo-accent-500);
+    color: #fff;
+    border-color: var(--mo-accent-500);
+    transform: translateY(-1px);
+    box-shadow: var(--mo-shadow-button);
+}
+
+.my-orders-order-top button:focus-visible {
+    outline: 2px solid var(--mo-accent-400);
+    outline-offset: 3px;
+}
+
+/* ============================================================
+   TRACKER
+   ============================================================ */
+.order-tracker {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--mo-line);
+}
+
+.tracker-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.3;
+    transition: opacity var(--mo-transition);
+}
+
+.tracker-step.completed,
+.tracker-step.current {
+    opacity: 1;
+}
+
+.tracker-icon {
+    font-size: 1.7rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+.tracker-label {
+    font-family: var(--mo-font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mo-ink-200);
+    text-align: center;
+}
+
+.tracker-step.current .tracker-label {
+    color: var(--mo-accent-300);
+    font-weight: 700;
+}
+
+.tracker-line {
+    flex: 1;
+    height: 2px;
+    background: var(--mo-line);
+    margin: 0 10px 22px;
+    border-radius: 2px;
+    transition: background var(--mo-transition),
+                box-shadow var(--mo-transition);
+}
+
+.tracker-line.completed {
+    background: var(--mo-accent-500);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+}
+
+/* ============================================================
+   BANNERS
+   ============================================================ */
+.order-cancelled-banner {
+    margin-top: 16px;
+    padding: 12px 16px;
+    font-family: var(--mo-font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: var(--mo-c-coral);
+    background: var(--mo-c-coral-soft);
+    border-left: 3px solid var(--mo-c-coral);
+    border-radius: var(--mo-radius-sm);
+    line-height: 1.5;
+}
+
+.order-pending-banner {
+    margin-top: 16px;
+    padding: 12px 16px;
+    font-family: var(--mo-font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: var(--mo-c-amber);
+    background: var(--mo-c-amber-soft);
+    border-left: 3px solid var(--mo-c-amber);
+    border-radius: var(--mo-radius-sm);
+    line-height: 1.5;
+}
+
+/* ============================================================
+   REVIEW SECTION
+   ============================================================ */
+.review-form,
+.review-display {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--mo-line);
+}
+
+.review-prompt {
+    margin: 0 0 10px 0;
+    font-family: var(--mo-font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--mo-c-fuchsia);
+}
+
+.review-label {
+    margin: 0 0 8px 0;
+    font-family: var(--mo-font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mo-ink-300);
+}
+
+.star-rating {
+    font-size: 2rem;
+    line-height: 1;
+    user-select: none;
+    margin-bottom: 12px;
+}
+
+.star {
+    color: #4C4478;              /* darker indigo for empty star */
+    padding: 0 3px;
+    cursor: pointer;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.star:hover {
+    transform: scale(1.15);
+}
+
+.star-filled {
+    color: var(--mo-c-gold);
+    text-shadow: 0 0 12px rgba(251, 191, 36, 0.7);
+}
+
+.review-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: var(--mo-font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--mo-ink-100);
+    background: var(--mo-surface-inset);
+    border: 1px solid var(--mo-line);
+    border-radius: var(--mo-radius-md);
+    outline: none;
+    resize: vertical;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    line-height: 1.55;
+    transition: border-color var(--mo-transition),
+                box-shadow var(--mo-transition),
+                background var(--mo-transition);
+}
+
+.review-form textarea::placeholder {
+    color: var(--mo-ink-400);
+    font-style: italic;
+}
+
+.review-form textarea:focus {
+    border-color: var(--mo-accent-500);
+    background: rgba(15, 23, 42, 0.78);
+    box-shadow: 0 0 0 3px var(--mo-accent-glow);
+}
+
+.review-submit {
+    padding: 11px 26px;
+    font-family: var(--mo-font-heading);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    background: var(--mo-accent-gradient);
+    border: none;
+    border-radius: var(--mo-radius-pill);
+    cursor: pointer;
+    box-shadow: var(--mo-shadow-button);
+    transition: transform var(--mo-transition),
+                box-shadow var(--mo-transition),
+                background var(--mo-transition),
+                opacity var(--mo-transition);
+}
+
+.review-submit:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: var(--mo-shadow-button-hover);
+    background: var(--mo-accent-gradient-hover);
+}
+
+.review-submit:disabled {
+    background: var(--mo-surface-700);
+    color: var(--mo-ink-400);
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+.review-submit:focus-visible {
+    outline: 2px solid var(--mo-accent-400);
+    outline-offset: 3px;
+}
+
+.review-comment {
+    margin: 10px 0;
+    padding: 12px 16px;
+    font-family: var(--mo-font-body);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--mo-ink-100);
+    background: var(--mo-c-gold-soft);
+    border-left: 3px solid var(--mo-c-gold);
+    border-radius: var(--mo-radius-sm);
+    line-height: 1.55;
+}
+
+.admin-reply {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--mo-accent-soft);
+    border-left: 3px solid var(--mo-accent-500);
+    border-radius: var(--mo-radius-sm);
+}
+
+.admin-reply-label {
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--mo-font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mo-accent-300);
+}
+
+.admin-reply-text {
+    margin: 0;
+    font-family: var(--mo-font-body);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--mo-ink-100);
+    line-height: 1.55;
+}
+
+/* ============================================================
+   EMPTY / LOADING
+   ============================================================ */
+.no-orders {
+    padding: 64px 24px;
+    text-align: center;
+    background: var(--mo-surface-800);
+    border: 1px dashed var(--mo-line-strong);
+    border-radius: var(--mo-radius-lg);
+}
+
+.no-orders p {
+    margin: 0 0 20px 0;
+    font-family: var(--mo-font-body);
+    font-size: 1.05rem;
+    color: var(--mo-ink-300);
+    line-height: 1.5;
+}
+
+.no-orders button {
+    padding: 11px 28px;
+    font-family: var(--mo-font-heading);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--mo-accent-gradient);
+    border: none;
+    border-radius: var(--mo-radius-pill);
+    cursor: pointer;
+    box-shadow: var(--mo-shadow-button);
+    transition: transform var(--mo-transition),
+                box-shadow var(--mo-transition),
+                background var(--mo-transition);
+}
+
+.no-orders button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mo-shadow-button-hover);
+    background: var(--mo-accent-gradient-hover);
+}
+
+.loading-spinner {
+    padding: 48px 24px;
+    text-align: center;
+    font-family: var(--mo-font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--mo-ink-300);
+}
+
+/* ============================================================
+   RESPONSIVE — Tablet
+   ============================================================ */
+@media (max-width: 720px) {
+    .my-orders {
+        padding: 24px 16px 50px;
+    }
+
+    .my-orders-heading h2 {
+        font-size: 1.75rem;
+    }
+
+    .my-orders-order {
+        padding: 20px 18px;
+    }
+
+    .order-amount {
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================================================
+   RESPONSIVE — Phone
+   ============================================================ */
+@media (max-width: 480px) {
+    .my-orders {
+        padding: 20px 14px 44px;
+    }
+
+    .my-orders-heading h2 {
+        font-size: 1.5rem;
+    }
+
+    .live-indicator {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+
+    .my-orders-order {
+        padding: 18px 16px;
+        border-radius: var(--mo-radius-md);
+    }
+
+    .my-orders-order-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .order-info {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .order-items {
+        font-size: 0.95rem;
+    }
+
+    .order-amount {
+        font-size: 1.2rem;
+    }
+
+    .tracker-icon {
+        font-size: 1.4rem;
+    }
+
+    .tracker-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.06em;
+    }
+
+    .star-rating {
+        font-size: 1.7rem;
+    }
+
+    .review-submit {
+        width: 100%;
+        text-align: center;
+    }
+
+    .no-orders button {
+        width: 100%;
+    }
+}
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    .my-orders-order,
+    .my-orders-order-top button,
+    .review-submit,
+    .no-orders button,
+    .tracker-line,
+    .live-dot,
+    .star {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .my-orders-order:hover {
+        transform: none;
+    }
+}

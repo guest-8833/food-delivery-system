@@ -1,0 +1,170 @@
+/* Footer.css – Modern Footer with customizable background */
+
+.footer {
+    /* OPTION 1: Dark glassmorphic (current) */
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(12px);
+    
+    /* OPTION 2: Solid dark color – uncomment below and comment above */
+    /* background: #1a1a2e; */
+    
+    /* OPTION 3: Gradient background – uncomment below */
+    /* background: linear-gradient(135deg, #1e1e2a, #2d2d3a); */
+    
+    /* OPTION 4: Light/white background – uncomment below (adjust text colors) */
+    /* background: #f8f9fa; */
+    
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 60px;
+    padding: 40px 20px 20px;
+}
+
+/* If you use light background (OPTION 4), also update text colors */
+/* .footer-content-left p,
+.footer-content-right li {
+    color: #333;
+}
+.footer-content-right h2 {
+    color: #ff4d6d;
+}
+.footer-social-icons img {
+    filter: none;
+    opacity: 0.7;
+}
+.footer-copyright {
+    color: #666;
+} */
+
+/* Rest of the CSS remains the same */
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    padding: 20px 40px 40px;
+}
+
+.footer-content-left h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff9a6e, #ff4d6d);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.footer-content-left p {
+    color: #e0e0e0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.footer-social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.footer-social-icons a:hover {
+    transform: translateY(-3px);
+}
+
+.footer-social-icons img {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.footer-social-icons a:hover img {
+    opacity: 1;
+}
+
+.footer-content-right h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ff9a6e;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.footer-content-right ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-content-right li {
+    color: #e0e0e0;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-content-right li::before {
+    content: "📍";
+    font-size: 1rem;
+}
+
+.footer-content-right li:last-child::before {
+    content: "✉️";
+}
+
+.footer hr {
+    max-width: 1400px;
+    margin: 20px auto;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 127, 80, 0.5), transparent);
+}
+
+.footer-copyright {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.85rem;
+    padding: 15px 0 10px;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 20px 20px 30px;
+    }
+    .footer-content-left h2 {
+        font-size: 1.8rem;
+    }
+    .footer-content-right h2 {
+        font-size: 1.2rem;
+    }
+    .footer-social-icons img {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 30px 15px 15px;
+    }
+    .footer-content-left p {
+        font-size: 0.85rem;
+    }
+    .footer-content-right li {
+        font-size: 0.85rem;
+    }
+}

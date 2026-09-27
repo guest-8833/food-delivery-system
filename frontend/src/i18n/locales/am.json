@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "መነሻ",
+    "menu": "ምናሌ",
+    "cart": "ጋሪ",
+    "myOrders": "ትዕዛዞቼ",
+    "login": "ግባ",
+    "logout": "ውጣ",
+    "mobileApp": "የሞባይል መተግበሪያ",
+    "contactUs": "ያግኙን",
+    "searchFood": "ምግብ ይፈልጉ...",
+    "searchPlaceholder": "ጣፋጭ ምግብ ይፈልጉ..."
+  },
+  "header": {
+    "title": "የኢትዮጵያን ጣዕም ይቅመሱ",
+    "subtitle": "ትክክለኛ የኢትዮጵያ ምግብ – እንጀራ፣ ዶሮ ወጥ፣ ጥብስ እና ሌሎችም።",
+    "cta": "ምናሌን ይመልከቱ"
+  },
+  "foodDisplay": {
+    "heading": "በአቅራቢያዎ ያሉ ምርጥ ምግቦች",
+    "subheading": "በጣም ተወዳጅ እና ከፍተኛ ደረጃ ያላቸውን ምግቦቻችንን ያግኙ",
+    "loading": "ጣፋጭ ምግብ በመጫን ላይ...",
+    "noItemsInCategory": "በ«{{category}}» ምድብ ውስጥ ምንም ንጥል አልተገኘም",
+    "tryOtherCategories": "ሌሎች ምድቦችን ይሞክሩ!",
+    "noItemsAvailable": "በአሁኑ ጊዜ ምንም የምግብ ንጥሎች የሉም።",
+    "refresh": "አድስ"
+  },
+  "foodItem": {
+    "addToCart": "ወደ ጋሪ ጨምር",
+    "currentlyUnavailable": "በአሁኑ ጊዜ አይገኝም",
+    "outOfStock": "ተሽጦ አልቋል",
+    "soldOut": "ተሽጦ አልቋል",
+    "left": "{{count}} ቀርቷል",
+    "percentOfSales": "{{percent}}% ከሽያጭ"
+  },
+  "cart": {
+    "title": "የእርስዎ ጋሪ",
+    "empty": "ጋሪዎ ባዶ ነው",
+    "emptySubtitle": "ለመጀመር ጣፋጭ ንጥሎችን ይጨምሩ!",
+    "browseMenu": "ምናሌን ያስሱ",
+    "item": "ንጥል",
+    "titleColumn": "ስም",
+    "price": "ዋጋ",
+    "quantity": "ብዛት",
+    "total": "ጠቅላላ",
+    "adjust": "አስተካክል",
+    "cartTotals": "የጋሪ ድምር",
+    "subtotal": "ንዑስ ድምር",
+    "deliveryFee": "የመላኪያ ክፍያ",
+    "proceedToCheckout": "ወደ ክፍያ ይቀጥሉ",
+    "deliveryInformation": "የመላኪያ መረጃ",
+    "firstName": "የመጀመሪያ ስም",
+    "lastName": "የአባት ስም",
+    "streetAddress": "የመንገድ አድራሻ",
+    "city": "ከተማ",
+    "state": "ክልል",
+    "country": "ሀገር",
+    "zipCode": "ፖስታ ኮድ",
+    "phoneNumber": "ስልክ ቁጥር",
+    "email": "ኢሜይል (ለቻፓ ክፍያ ያስፈልጋል)",
+    "paymentMethod": "የክፍያ ዘዴ",
+    "cashOnDelivery": "እጅ ላይ ክፍያ",
+    "chapaPayment": "ቻፓ (ካርድ / ቴሌብር / ሲቢኢ)",
+    "placeOrder": "ትዕዛዝ ስጥ",
+    "placingOrder": "ትዕዛዝ በመላክ ላይ...",
+    "onlyInStock": "{{count}} ብቻ ቀርቷል — ከፍተኛው ደርሷል",
+    "noMoreInStock": "ተጨማሪ የለም"
+  },
+  "myOrders": {
+    "title": "ትዕዛዞቼ",
+    "pleaseLogin": "ትዕዛዞችዎን ለማየት እባክዎ ይግቡ።",
+    "loading": "ትዕዛዞችዎ በመጫን ላይ...",
+    "noOrders": "ምንም ትዕዛዝ አልተገኘም።",
+    "startShopping": "ግዢ ጀምር",
+    "live": "ቀጥታ",
+    "updated": "የተዘመነው {{time}}",
+    "processing": "በሂደት ላይ",
+    "outForDelivery": "ለመላኪያ ወጥቷል",
+    "delivered": "ደርሷል",
+    "statusPendingPayment": "ክፍያ በመጠባበቅ ላይ",
+    "statusCancelled": "ተሰርዟል",
+    "paid": "ተከፍሏል",
+    "pending": "በመጠባበቅ ላይ",
+    "items": "ንጥሎች",
+    "cancelled": "ይህ ትዕዛዝ ተሰርዟል።",
+    "waitingForPayment": "የክፍያ ማረጋገጫ በመጠባበቅ ላይ...",
+    "refresh": "አድስ"
+  },
+  "common": {
+    "etb": "ብር"
+  },
+  "footer": {
+    "brand": "ዘንገና",
+    "about": "ዘንገና ሬስቶራንት በኢትዮጵያ የምግብ ዘርፍ አዲስ እና ዘመናዊ የመመገቢያ ተሞክሮ ይዞ የመጣ አዲስ የምግብ መዳረሻ ነው። በታዋቂው የእሳተ ገሞራ ሐይቅ ውበት እና ጥልቀት ተመስጦ፣ ትክክለኛ የኢትዮጵያ ጣዕሞችን እና ዘመናዊ ምግቦችን አዋህደን እናቀርባለን። ደማቅ የቤተሰብ እራት ወይም ዘና የሚል ቦታ ብትፈልጉ፣ ዘንገና ልዩ ጣዕም፣ ሞቅ ያለ እንግዳ ተቀባይነት እና አዲስ ድባብ ያቀርብልዎታል።",
+    "getInTouch": "ያግኙን",
+    "phone": "+251983394567",
+    "email": "you375537@gmail.com",
+    "copyright": "መብቱ በህግ የተጠበቀ ነው።"
+  }
+}
